@@ -1,0 +1,524 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Rankine completo}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ciclo-de-rankine}{%
+\section{Ciclo de Rankine}\label{ciclo-de-rankine}}
+
+Estudio de un ciclo ideal de Rankine básico (sin recalentamiento). Datos
+de partida:
+
+\begin{itemize}
+\tightlist
+\item
+  Temperatura del agua a la entrada del boiler: 26,85 ºC (300 K)
+\item
+  Temperatura del vapor a la entrada de la turbina: 626,85 ºC (900 K)
+\item
+  Presión a la entrada del boiler: 10 kPa
+\item
+  Presión a la entrada de la turbina: 10 MPa
+\item
+  Flujo de vapor: 20 kg/s
+\end{itemize}
+
+Eficiencias de los equipos: como es el ciclo ideal, de momento las
+dejamos a 1. Pero dejaremos preparado el código para añadir las
+eficiencias más tarde.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Importamos los paquetes necesarios}
+        
+        \PY{k+kn}{import} \PY{n+nn}{cantera} \PY{k}{as} \PY{n+nn}{ct}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Funciones de visualización}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}water\PYZus{}curve}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Ts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{274}\PY{p}{,} \PY{n}{w}\PY{o}{.}\PY{n}{critical\PYZus{}temperature}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{Xs} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{T\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{s\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Ts}\PY{p}{:}
+                 \PY{n}{w}\PY{o}{.}\PY{n}{TX} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{l+m+mf}{0.0}
+                 \PY{n}{T\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                 \PY{n}{s\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{s}\PY{p}{)}
+         
+             \PY{n}{Ts2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{critical\PYZus{}temperature}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{274}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{Xs2} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{T2\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{s2\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Ts}\PY{p}{:}
+                 \PY{n}{w}\PY{o}{.}\PY{n}{TX} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{l+m+mf}{1.0}
+                 \PY{n}{T2\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                 \PY{n}{s2\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{s}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{s\PYZus{}line}\PY{p}{,} \PY{n}{T\PYZus{}line}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{s2\PYZus{}line}\PY{p}{,} \PY{n}{T2\PYZus{}line}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+             
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}isobar}\PY{p}{(}\PY{n}{P}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Ts3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{critical\PYZus{}temperature}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{650}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{3900}\PY{p}{,} \PY{l+m+mi}{11900}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{T3\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{s3\PYZus{}line} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{S}\PY{p}{:}
+                 \PY{n}{w}\PY{o}{.}\PY{n}{SP} \PY{o}{=} \PY{n}{i}\PY{p}{,} \PY{n}{P}
+                 \PY{n}{T3\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                 \PY{n}{s3\PYZus{}line}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{s}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{s3\PYZus{}line}\PY{p}{,} \PY{n}{T3\PYZus{}line}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}estado}\PY{p}{(}\PY{n}{estado}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{n}{estado}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{s} \PY{o}{=} \PY{n}{estado}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{estado}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{s}\PY{o}{+}\PY{n}{offset}\PY{p}{,} \PY{n}{t}\PY{o}{+}\PY{n}{offset}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} Funciones del ciclo}
+         
+         \PY{k}{def} \PY{n+nf}{bomba}\PY{p}{(}\PY{n}{fluido}\PY{p}{,} \PY{n}{presion\PYZus{}final}\PY{p}{,} \PY{n}{rendimiento}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Compresión adiabática hasta presión final con una bomba con rendimiento\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{h0} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+             \PY{n}{s0} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{s}
+             \PY{n}{fluido}\PY{o}{.}\PY{n}{SP} \PY{o}{=} \PY{n}{s0}\PY{p}{,} \PY{n}{presion\PYZus{}final}
+             \PY{n}{h1s} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+             \PY{n}{trabajo\PYZus{}isentropico} \PY{o}{=} \PY{n}{h1s} \PY{o}{\PYZhy{}} \PY{n}{h0}
+             \PY{n}{trabajo\PYZus{}real} \PY{o}{=} \PY{n}{trabajo\PYZus{}isentropico} \PY{o}{/} \PY{n}{rendimiento}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trabajo isentropico (bomba): }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg, Trabajo real (bomba): }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{trabajo\PYZus{}isentropico}\PY{p}{,} \PY{n}{trabajo\PYZus{}real}\PY{p}{)}\PY{p}{)}
+             \PY{n}{h1} \PY{o}{=} \PY{n}{h0} \PY{o}{+} \PY{n}{trabajo\PYZus{}real}
+             \PY{n}{fluido}\PY{o}{.}\PY{n}{HP} \PY{o}{=} \PY{n}{h1}\PY{p}{,} \PY{n}{presion\PYZus{}final}
+             \PY{k}{return} \PY{n}{trabajo\PYZus{}real}
+         
+         \PY{k}{def} \PY{n+nf}{turbina}\PY{p}{(}\PY{n}{fluido}\PY{p}{,} \PY{n}{presion\PYZus{}final}\PY{p}{,} \PY{n}{rendimiento}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Expansión adiabática hasta presion\PYZus{}final, con una turbina con rendimiento\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{h0} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+             \PY{n}{s0} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{s}
+             \PY{n}{fluido}\PY{o}{.}\PY{n}{SP} \PY{o}{=} \PY{n}{s0}\PY{p}{,} \PY{n}{presion\PYZus{}final}
+             \PY{n}{h1s} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+             \PY{n}{trabajo\PYZus{}isentropico} \PY{o}{=} \PY{n}{h0} \PY{o}{\PYZhy{}} \PY{n}{h1s}
+             \PY{n}{trabajo\PYZus{}real} \PY{o}{=} \PY{n}{trabajo\PYZus{}isentropico} \PY{o}{*} \PY{n}{rendimiento}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trabajo isentropico (turbina): }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg, Trabajo real (turbina): }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{trabajo\PYZus{}isentropico}\PY{p}{,} \PY{n}{trabajo\PYZus{}real}\PY{p}{)}\PY{p}{)}
+             \PY{n}{h1} \PY{o}{=} \PY{n}{h0} \PY{o}{\PYZhy{}} \PY{n}{trabajo\PYZus{}real}
+             \PY{n}{fluido}\PY{o}{.}\PY{n}{HP} \PY{o}{=} \PY{n}{h1}\PY{p}{,} \PY{n}{presion\PYZus{}final}
+             \PY{k}{return} \PY{n}{trabajo\PYZus{}real}
+         
+         \PY{k}{def} \PY{n+nf}{boiler}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{T\PYZus{}final}\PY{p}{,} \PY{n}{presion}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Calentamiento del fluido hasta temperatura T\PYZus{}final a presión constante\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{h\PYZus{}pre} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{h}
+             \PY{n}{w}\PY{o}{.}\PY{n}{TP} \PY{o}{=} \PY{n}{T\PYZus{}final}\PY{p}{,} \PY{n}{presion}
+             \PY{n}{h\PYZus{}post} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{h}
+             \PY{n}{calor\PYZus{}in} \PY{o}{=} \PY{n}{h\PYZus{}post} \PY{o}{\PYZhy{}} \PY{n}{h\PYZus{}pre}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Calor (boiler):  }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{calor\PYZus{}in}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{calor\PYZus{}in}
+         
+         \PY{k}{def} \PY{n+nf}{condensador}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{T\PYZus{}final}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Disipación de calor hasta que la fracción sea 0 y a una temperatura T\PYZus{}final\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{h\PYZus{}pre} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{h}
+             \PY{n}{w}\PY{o}{.}\PY{n}{TX} \PY{o}{=} \PY{n}{T\PYZus{}final}\PY{p}{,} \PY{l+m+mf}{0.0}
+             \PY{n}{h\PYZus{}post} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{h}
+             \PY{n}{calor\PYZus{}out} \PY{o}{=} \PY{n}{h\PYZus{}pre} \PY{o}{\PYZhy{}} \PY{n}{h\PYZus{}post}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Calor disipado (condensador): }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{calor\PYZus{}out}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{calor\PYZus{}out}
+         
+         \PY{k}{def} \PY{n+nf}{entalpia}\PY{p}{(}\PY{n}{fluido}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+         
+         \PY{k}{def} \PY{n+nf}{print\PYZus{}estados}\PY{p}{(}\PY{n}{fluido}\PY{p}{,} \PY{n}{id\PYZus{}estado}\PY{p}{)}\PY{p}{:}
+             \PY{n}{h} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{h}
+             \PY{n}{p} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{P}
+             \PY{n}{T} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{T}
+             \PY{n}{s} \PY{o}{=} \PY{n}{fluido}\PY{o}{.}\PY{n}{s}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estado \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ \PYZhy{}\PYZhy{}\PYZgt{} h:}\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ J/kg, p:}\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{ Pa, T:}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ K, s:}\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ J/kg·K}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{id\PYZus{}estado}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{s}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{id\PYZus{}estado}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{n}{s}
+         
+         \PY{k}{def} \PY{n+nf}{eficiencia\PYZus{}ciclo}\PY{p}{(}\PY{n}{calor\PYZus{}in}\PY{p}{,} \PY{n}{trabajo\PYZus{}turbina}\PY{p}{,} \PY{n}{trabajo\PYZus{}bomba}\PY{p}{)}\PY{p}{:}
+             \PY{n}{eficiencia} \PY{o}{=} \PY{p}{(}\PY{n}{trabajo\PYZus{}turbina} \PY{o}{\PYZhy{}} \PY{n}{trabajo\PYZus{}bomba}\PY{p}{)} \PY{o}{/} \PY{n}{calor\PYZus{}in}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eficiencia del ciclo: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{eficiencia}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{eficiencia}
+         
+         \PY{k}{def} \PY{n+nf}{potencia\PYZus{}ciclo}\PY{p}{(}\PY{n}{flujo\PYZus{}vapor}\PY{p}{,} \PY{n}{trabajo\PYZus{}turbina}\PY{p}{,} \PY{n}{trabajo\PYZus{}bomba}\PY{p}{)}\PY{p}{:}
+             \PY{n}{trabajo\PYZus{}neto} \PY{o}{=} \PY{n}{trabajo\PYZus{}turbina} \PY{o}{\PYZhy{}} \PY{n}{trabajo\PYZus{}bomba}
+             \PY{n}{potencia} \PY{o}{=} \PY{n}{trabajo\PYZus{}neto} \PY{o}{*} \PY{n}{flujo\PYZus{}vapor} \PY{o}{/} \PY{l+m+mi}{1000}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Potencia del ciclo: }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s1}{ kW}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{potencia}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{potencia}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} Condiciones de partida}
+         \PY{n}{T\PYZus{}inicial} \PY{o}{=} \PY{l+m+mi}{300}
+         \PY{n}{P\PYZus{}inicial} \PY{o}{=} \PY{l+m+mf}{10e3}
+         \PY{n}{T\PYZus{}turbina} \PY{o}{=} \PY{l+m+mi}{900}
+         \PY{n}{P\PYZus{}salida} \PY{o}{=} \PY{l+m+mf}{10e6}
+         \PY{n}{flujo\PYZus{}vapor} \PY{o}{=} \PY{l+m+mi}{20}
+         
+         \PY{c+c1}{\PYZsh{} Definición del fluido}
+         \PY{n}{w} \PY{o}{=} \PY{n}{ct}\PY{o}{.}\PY{n}{Water}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Parámetros de los equipos}
+         \PY{n}{rendimiento\PYZus{}bomba} \PY{o}{=} \PY{l+m+mf}{1.0}
+         \PY{n}{rendimiento\PYZus{}turbina} \PY{o}{=} \PY{l+m+mf}{1.0}
+         
+         \PY{c+c1}{\PYZsh{} Estado 1 (antes de entrar en la bomba/salida del condensador)}
+         \PY{n}{w}\PY{o}{.}\PY{n}{TP} \PY{o}{=} \PY{n}{T\PYZus{}inicial}\PY{p}{,} \PY{n}{P\PYZus{}inicial}
+         \PY{n}{h1} \PY{o}{=} \PY{n}{entalpia}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         \PY{n}{estado1} \PY{o}{=} \PY{n}{print\PYZus{}estados}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Bomba}
+         \PY{n}{trabajo\PYZus{}bomba} \PY{o}{=} \PY{n}{bomba}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{P\PYZus{}salida}\PY{p}{,} \PY{n}{rendimiento\PYZus{}bomba}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Estado 2 (a la salida de la bomba/entrada al boiler)}
+         \PY{n}{h2} \PY{o}{=} \PY{n}{entalpia}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         \PY{n}{estado2} \PY{o}{=} \PY{n}{print\PYZus{}estados}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Boiler}
+         \PY{n}{calor\PYZus{}introducido} \PY{o}{=} \PY{n}{boiler}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{T\PYZus{}turbina}\PY{p}{,} \PY{n}{P\PYZus{}salida}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Estado 3 (a la salida del boiler/entrada de la turbina)}
+         \PY{n}{h3} \PY{o}{=} \PY{n}{entalpia}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         \PY{n}{estado3} \PY{o}{=} \PY{n}{print\PYZus{}estados}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Turbina}
+         \PY{n}{trabajo\PYZus{}turbina} \PY{o}{=} \PY{n}{turbina}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{P\PYZus{}inicial}\PY{p}{,} \PY{n}{rendimiento\PYZus{}turbina}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Estado 4 (a la salida de la turbina/entrada al condensador)}
+         \PY{n}{h4} \PY{o}{=} \PY{n}{entalpia}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         \PY{n}{estado4} \PY{o}{=} \PY{n}{print\PYZus{}estados}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Condensador}
+         \PY{n}{calor\PYZus{}disipado} \PY{o}{=} \PY{n}{condensador}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{T\PYZus{}inicial}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Eficiencia y potencia del ciclo}
+         \PY{n}{eficiencia} \PY{o}{=} \PY{n}{eficiencia\PYZus{}ciclo}\PY{p}{(}\PY{n}{calor\PYZus{}introducido}\PY{p}{,} \PY{n}{trabajo\PYZus{}turbina}\PY{p}{,} \PY{n}{trabajo\PYZus{}bomba}\PY{p}{)}
+         \PY{n}{potencia} \PY{o}{=} \PY{n}{potencia\PYZus{}ciclo}\PY{p}{(}\PY{n}{flujo\PYZus{}vapor}\PY{p}{,} \PY{n}{trabajo\PYZus{}turbina}\PY{p}{,} \PY{n}{trabajo\PYZus{}bomba}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Estado \#1 --> h:-15858194.325 J/kg, p:10000.000 Pa, T:300.00 K, s:3913.20 J/kg·K
+Trabajo isentropico (bomba): 10002.004 J/kg, Trabajo real (bomba): 10002.004 J/kg
+Estado \#2 --> h:-15848192.321 J/kg, p:10000000.010 Pa, T:300.20 K, s:3913.20 J/kg·K
+Calor (boiler):  3568890.793 J/kg
+Estado \#3 --> h:-12279301.527 J/kg, p:10000000.002 Pa, T:900.00 K, s:10497.45 J/kg·K
+Trabajo isentropico (turbina): 1480961.574 J/kg, Trabajo real (turbina): 1480961.574 J/kg
+Estado \#4 --> h:-13760263.101 J/kg, p:10000.000 Pa, T:319.00 K, s:10497.45 J/kg·K
+Calor disipado (condensador): 2097937.184 J/kg
+Eficiencia del ciclo: 0.41
+Potencia del ciclo: 29419.19 kW
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} Visualización}
+         
+         \PY{n}{plot\PYZus{}water\PYZus{}curve}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         \PY{n}{plot\PYZus{}isobar}\PY{p}{(}\PY{n}{P\PYZus{}inicial}\PY{p}{)}
+         \PY{n}{plot\PYZus{}isobar}\PY{p}{(}\PY{n}{P\PYZus{}salida}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}estado}\PY{p}{(}\PY{n}{estado1}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{70}\PY{p}{)}
+         \PY{n}{plot\PYZus{}estado}\PY{p}{(}\PY{n}{estado2}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{plot\PYZus{}estado}\PY{p}{(}\PY{n}{estado3}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{70}\PY{p}{)}
+         \PY{n}{plot\PYZus{}estado}\PY{p}{(}\PY{n}{estado4}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
